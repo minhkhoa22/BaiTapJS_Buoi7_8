@@ -45,7 +45,7 @@ let countPositive = () => {
 };
 // Tìm số nhỏ nhất
 let findMin = () => {
-  let min = null;
+  let min = numberArr[0];
   numberArr.forEach((num) => {
     if (min > num) {
       min = num;
@@ -106,10 +106,64 @@ let changePosition = () => {
 // Sắp xếp tăng dần
 let increase = () => {
   numberArr.sort((a, b) => a - b);
-  document.getElementById("resultIncrease").innerHTML = `Mảng sau khi sắp xếp tăng dần: ${numberArr}`;
+  document.getElementById(
+    "resultIncrease"
+  ).innerHTML = `Mảng sau khi sắp xếp tăng dần: ${numberArr}`;
 };
 // Tìm số nguyên tố đầu tiên
 let primeNumber = () => {
-  numberArr.sort((a, b) => a - b);
-  document.getElementById("resultIncrease").innerHTML = `Mảng sau khi sắp xếp tăng dần: ${numberArr}`;
+  const isPrime = (num) => {
+    if (num <= 1) return false;
+    for (let i = 2; i <= Math.sqrt(num); i++) {
+      if (num % i === 0) return false; 
+    }
+    return true;
+  };
+
+  let firstPrime = null;
+  for (let num of numberArr) {
+    if (isPrime(num)) {
+      firstPrime = num;
+      break;
+    }
+  }
+  if (firstPrime !== null) {
+    document.getElementById(
+      "resultPrimeNumber"
+    ).innerText = `Số nguyên tố đầu tiên là: ${firstPrime}`;
+  } else {
+    document.getElementById("resultPrimeNumber").innerText =
+      "Không có số nguyên tố nào trong mảng.";
+  }
+};
+// Đếm số nguyên
+let countInteger = () => {
+  let integeCount = 0;
+  numberArr.forEach((num) => {
+    if (Number.isInteger(num)) {
+      integeCount++;
+    }
+  });
+  document.getElementById(
+    "resultCountInteger"
+  ).innerText = `Số lượng số nguyên trong mảng: ${integeCount}`;
+};
+// So sánh số lượng số dương và số âm
+let compare = () => {
+  let positve = 0;
+  let negative = 0;
+  numberArr.forEach((sum) => {
+    if (sum > 0) {
+      positve++;
+    } else if (sum < 0) {
+      negative++;
+    }
+  });
+  if (positve > negative) {
+    document.getElementById("resultCompare").innerText = `Số dương > số âm`;
+  } else if (positve < negative) {
+    document.getElementById("resultCompare").innerText = `Số âm > số dương`;
+  } else {
+    document.getElementById("resultCompare").innerText = `Số dương = số âm`;
+  }
 };
